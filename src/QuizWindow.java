@@ -3,38 +3,35 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class QuizWindow extends JFrame {
+public class QuizWindow {
 
+    private JFrame frame;
     private JLabel frageLabel;
     private JButton button1;
     private JButton button2;
     private JButton button3;
 
-    // Speichert die aktuelle Frage
     private int frage = 1;
 
     public QuizWindow() {
 
-        setTitle("Quiz");
-        setSize(500, 200);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame = new JFrame("Quiz");
 
-        setLayout(new FlowLayout());
+        frame.setSize(500, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
 
-        // Erste Frage anzeigen
         frageLabel = new JLabel("Wie heißt die Hauptstadt von Deutschland?");
 
-        // Antwort-Buttons
         button1 = new JButton("Berlin");
         button2 = new JButton("Hamburg");
         button3 = new JButton("München");
 
-        add(frageLabel);
-        add(button1);
-        add(button2);
-        add(button3);
+        frame.add(frageLabel);
+        frame.add(button1);
+        frame.add(button2);
+        frame.add(button3);
 
-        // Klick auf Button 1
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,7 +39,6 @@ public class QuizWindow extends JFrame {
             }
         });
 
-        // Klick auf Button 2
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,7 +46,6 @@ public class QuizWindow extends JFrame {
             }
         });
 
-        // Klick auf Button 3
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,33 +53,21 @@ public class QuizWindow extends JFrame {
             }
         });
 
-        setVisible(true);
+        frame.setVisible(true);
     }
 
-    // Prüft die ausgewählte Antwort
     private void auswahl(String antwort) {
 
-        // Frage 1
         if (frage == 1) {
 
             if (antwort.equals("Berlin")) {
-                JOptionPane.showMessageDialog(this, "Richtig!");
+                JOptionPane.showMessageDialog(frame, "Richtig!");
             } else {
-                JOptionPane.showMessageDialog(this, "Falsch!");
+                JOptionPane.showMessageDialog(frame, "Falsch!");
             }
 
-            // Nächste Frage laden
-            frage = 2;
-
-            frageLabel.setText("Wie viele Tage hat eine Woche?");
-            button1.setText("5");
-            button2.setText("7");
-            button3.setText("10");
+            JOptionPane.showMessageDialog(frame, "Quiz beendet!");
+            frame.dispose();
         }
-
-
-        // Quiz beenden
-        JOptionPane.showMessageDialog(this, "Quiz beendet!");
-        dispose();
     }
 }
