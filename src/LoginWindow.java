@@ -15,10 +15,15 @@ public class LoginWindow {
 
         JLabel nameLabel = new JLabel("Name:");
         JTextField nameField = new JTextField(15);
+        JLabel passwordLabel = new JLabel("Passwort:");
+        JPasswordField password = new JPasswordField(15);
         JButton startButton = new JButton("Start");
+
 
         frame.add(nameLabel);
         frame.add(nameField);
+        frame.add(passwordLabel);
+        frame.add(password);
         frame.add(startButton);
 
         startButton.addActionListener(new ActionListener() {
