@@ -216,7 +216,7 @@ public class QuizWindow {
             if (gewaehlteAntwort.equals("Universal Serial Bus")) {
                 JOptionPane.showMessageDialog(frame, "Korrekt! USB bedeutet Universal Serial Bus.");
             } else {
-                JOptionPane.showMessageDialog(frame, "Leider falsch!");
+                JOptionPane.showMessageDialog(frame, "Leider fasch!");
             }
 
 
