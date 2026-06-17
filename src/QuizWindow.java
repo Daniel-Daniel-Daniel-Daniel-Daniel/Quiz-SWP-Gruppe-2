@@ -64,11 +64,20 @@ public class QuizWindow {
         frame.setVisible(true);
     }
 
+    private void resetButtonColors(){
+        button1.setBackground(null);
+        button2.setBackground(null);
+        button3.setBackground(null);
+        button4.setBackground(null);
+    }
+
     private void auswahl(String gewaehlteAntwort) {
 
         if (frageNummer == 1) {
             if (gewaehlteAntwort.equals("Ouagadougou")) {
+                button2.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! Ouagadougou ist korrekt!");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort ist Ouagadougou.");
             }
@@ -85,7 +94,9 @@ public class QuizWindow {
 
         if (frageNummer == 2) {
             if (gewaehlteAntwort.equals("Compiler übersetzt alles vorab / Interpreter Zeile für Zeile")) {
+                button2.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! Compiler macht alles auf einmal.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Der Compiler übersetzt den gesamten Code vorab.");
             }
@@ -102,7 +113,9 @@ public class QuizWindow {
 
         if (frageNummer == 3) {
             if (gewaehlteAntwort.equals("Bhutan")) {
+                button3.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! Bhutan hat weltweit die höchste durchschnittliche Geländehöhe.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort ist Bhutan.");
             }
@@ -118,7 +131,9 @@ public class QuizWindow {
 
         if (frageNummer == 4) {
             if (gewaehlteAntwort.equals("Ein Array hat eine feste Größe, Listen sind dynamisch")) {
+                button2.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! Listen können flexibel wachsen.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Leider falsch! Arrays besitzen eine feste Größe.");
             }
@@ -135,7 +150,9 @@ public class QuizWindow {
 
         if (frageNummer == 5) {
             if (gewaehlteAntwort.equals("Tansania/Kenya")) {
+                button1.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! Er befindet sich an der Grenze von Tansania und Kenia.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Richtige Antwort ist Tansania/Kenya.");
             }
@@ -151,7 +168,9 @@ public class QuizWindow {
 
         if (frageNummer == 6) {
             if (gewaehlteAntwort.equals("Ein logischer Datentyp für true oder false")) {
+                button3.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! Ein Boolean kennt nur wahr oder falsch.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Er steht ausschließlich für true oder false.");
             }
@@ -168,7 +187,9 @@ public class QuizWindow {
 
         if (frageNummer == 7) {
             if (gewaehlteAntwort.equals("5")) {
+                button3.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! Es stehen pro Team 5 Feldspieler auf dem Platz.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Es sind 5 Spieler.");
             }
@@ -184,7 +205,9 @@ public class QuizWindow {
 
         if (frageNummer == 8) {
             if (gewaehlteAntwort.equals("George Orwell")) {
+                button2.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Richtig! George Orwell schrieb diesen weltbekannten Roman.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Der Autor heißt George Orwell.");
             }
@@ -200,7 +223,9 @@ public class QuizWindow {
 
         if (frageNummer == 9) {
             if (gewaehlteAntwort.equals("Leonardo Da Vinci")) {
+                button4.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Absolut richtig! Leonardo Da Vinci hat sie weltberühmt gemacht.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Falsch! Es war Leonardo Da Vinci.");
             }
@@ -216,7 +241,9 @@ public class QuizWindow {
 
         if (frageNummer == 10) {
             if (gewaehlteAntwort.equals("Universal Serial Bus")) {
+                button1.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(frame, "Korrekt! USB bedeutet Universal Serial Bus.");
+                resetButtonColors();
             } else {
                 JOptionPane.showMessageDialog(frame, "Leider fasch!");
             }
