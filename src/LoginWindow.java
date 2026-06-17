@@ -13,8 +13,7 @@ class LoginFenster extends JFrame {
         setTitle("Quiz-App Anmeldung");
         setSize(350, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(new GridLayout(3, 2, 10, 10));
+        setLayout(new GridLayout(3, 2));
 
         add(new JLabel("  Benutzername:"));
         benutzerfeld = new JTextField();
@@ -44,18 +43,12 @@ class LoginFenster extends JFrame {
         if (benutzer.equals("admin") && passwort.equals("1234")) {
             JOptionPane.showMessageDialog(this, "Anmeldung erfolgreich! Das Quiz startet jetzt.");
 
-            // NEU: Hier wird jetzt das zusätzliche Quiz-Fenster geöffnet!
+
             new QuizWindow();
 
-            this.dispose(); // Schließt das Anmeldefenster
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Falscher Benutzername oder Passwort!", "Fehler", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    // Die Main-Methode, um das Programm ganz einfach zu starten
-    public static void main(String[] args) {
-        LoginFenster start = new LoginFenster();
-        start.setVisible(true);
     }
-}

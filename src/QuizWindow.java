@@ -10,19 +10,16 @@ public class QuizWindow {
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JButton button4; // Der vierte Button für Auswahl d)
+    private JButton button4;
 
-    // Wir starten bei Frage 1
     private int frageNummer = 1;
 
     public QuizWindow() {
         frame = new JFrame("Das große SWP-Quiz");
-        frame.setSize(650, 300); // Etwas höher, damit 4 Buttons Platz haben
+        frame.setSize(650, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout());
-        frame.setLocationRelativeTo(null); // Zentriert auf dem Bildschirm
 
-        // --- START MIT FRAGE 1 (Aus deiner Datei) ---
         frageLabel = new JLabel("Frage 1: Was ist die Hauptstadt von Burkina Faso?");
         button1 = new JButton("Luanda");
         button2 = new JButton("Ouagadougou");
@@ -33,9 +30,9 @@ public class QuizWindow {
         frame.add(button1);
         frame.add(button2);
         frame.add(button3);
-        frame.add(button4); // Button 4 hinzufügen
+        frame.add(button4);
 
-        // Klick-Aktionen für alle vier Knöpfe
+
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,7 +66,6 @@ public class QuizWindow {
 
     private void auswahl(String gewaehlteAntwort) {
 
-        // --- FRAGE 1 (Geografie) ---
         if (frageNummer == 1) {
             if (gewaehlteAntwort.equals("Ouagadougou")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! Ouagadougou ist korrekt!");
@@ -77,14 +73,14 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort ist Ouagadougou.");
             }
 
-            // Jetzt Text für Frage 2 setzen (Aus der IT-Liste)
+
             frageNummer = 2;
             frageLabel.setText("Frage 2: Was ist der Unterschied zwischen einem Compiler und einem Interpreter?");
             button1.setText("Compiler übersetzt alles vorab / Interpreter Zeile für Zeile");
             button2.setText("Interpreter übersetzt alles vorab / Compiler Zeile für Zeile");
             button3.setText("Es gibt überhaupt keinen Unterschied");
-            button4.setText("- Nicht belegt -"); // Wird für diese Frage nicht benötigt
-            return; // Verhindert das Durchrutschen in die nächste Bedingung
+            button4.setText("- Nicht belegt -");
+            return;
         }
 
         // --- FRAGE 2 (IT) ---
@@ -95,7 +91,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Der Compiler übersetzt den gesamten Code vorab.");
             }
 
-            // Text für Frage 3 setzen (Aus deiner Datei)
             frageNummer = 3;
             frageLabel.setText("Frage 3: Was ist das Land mit der höchsten Durchschnittshöhe?");
             button1.setText("Nepal");
@@ -105,7 +100,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 3 (Geografie) ---
         if (frageNummer == 3) {
             if (gewaehlteAntwort.equals("Bhutan")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! Bhutan hat weltweit die höchste durchschnittliche Geländehöhe.");
@@ -113,7 +107,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort ist Bhutan.");
             }
 
-            // Text für Frage 4 setzen (Aus der IT-Liste)
             frageNummer = 4;
             frageLabel.setText("Frage 4: Was unterscheidet ein Array von einer Liste?");
             button1.setText("Eine Liste hat immer eine feste Größe");
@@ -123,7 +116,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 4 (IT) ---
         if (frageNummer == 4) {
             if (gewaehlteAntwort.equals("Ein Array hat eine feste Größe, Listen sind dynamisch")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! Listen können flexibel wachsen.");
@@ -131,7 +123,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Leider falsch! Arrays besitzen eine feste Größe.");
             }
 
-            // Text für Frage 5 setzen (Aus deiner Datei)
             frageNummer = 5;
             frageLabel.setText("Frage 5: Zwischen welchen Ländern liegt der Kilimandscharo?");
             button1.setText("Tansania/Kenya");
@@ -141,7 +132,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 5 (Geografie) ---
         if (frageNummer == 5) {
             if (gewaehlteAntwort.equals("Tansania/Kenya")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! Er befindet sich an der Grenze von Tansania und Kenia.");
@@ -149,7 +139,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Richtige Antwort ist Tansania/Kenya.");
             }
 
-            // Text für Frage 6 setzen (Aus der IT-Liste)
             frageNummer = 6;
             frageLabel.setText("Frage 6: Was bedeutet der Datentyp 'Boolean'?");
             button1.setText("Ein Text-Datentyp für Wörter");
@@ -159,7 +148,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 6 (IT) ---
         if (frageNummer == 6) {
             if (gewaehlteAntwort.equals("Ein logischer Datentyp für true oder false")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! Ein Boolean kennt nur wahr oder falsch.");
@@ -167,7 +155,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Er steht ausschließlich für true oder false.");
             }
 
-            // Text für Frage 7 setzen (Aus deiner Datei)
             frageNummer = 7;
             frageLabel.setText("Frage 7: Wie viele Spieler stehen beim Basketball auf dem Platz?");
             button1.setText("6");
@@ -177,7 +164,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 7 (Sport) ---
         if (frageNummer == 7) {
             if (gewaehlteAntwort.equals("5")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! Es stehen pro Team 5 Feldspieler auf dem Platz.");
@@ -185,7 +171,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Es sind 5 Spieler.");
             }
 
-            // Text für Frage 8 setzen (Aus deiner Datei)
             frageNummer = 8;
             frageLabel.setText("Frage 8: Wer schrieb den Roman „1984“?");
             button1.setText("Franz Kafka");
@@ -195,7 +180,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 8 (Allgemeinwissen) ---
         if (frageNummer == 8) {
             if (gewaehlteAntwort.equals("George Orwell")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! George Orwell schrieb diesen weltbekannten Roman.");
@@ -203,7 +187,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Der Autor heißt George Orwell.");
             }
 
-            // Text für Frage 9 setzen (Aus deiner Datei)
             frageNummer = 9;
             frageLabel.setText("Frage 9: Wer malte das Bild „Mona Lisa“?");
             button1.setText("Jean-Michel Basquiat");
@@ -213,7 +196,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 9 (Kunst) ---
         if (frageNummer == 9) {
             if (gewaehlteAntwort.equals("Leonardo Da Vinci")) {
                 JOptionPane.showMessageDialog(frame, "Absolut richtig! Leonardo Da Vinci hat sie weltberühmt gemacht.");
@@ -221,7 +203,6 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Falsch! Es war Leonardo Da Vinci.");
             }
 
-            // Text für Frage 10 (Aus der IT-Liste)
             frageNummer = 10;
             frageLabel.setText("Frage 10: Für was steht die Abkürzung 'USB'?");
             button1.setText("Universal Serial Bus");
@@ -231,7 +212,6 @@ public class QuizWindow {
             return;
         }
 
-        // --- FRAGE 10 (IT / Letzte Frage) ---
         if (frageNummer == 10) {
             if (gewaehlteAntwort.equals("Universal Serial Bus")) {
                 JOptionPane.showMessageDialog(frame, "Korrekt! USB bedeutet Universal Serial Bus.");
@@ -239,9 +219,9 @@ public class QuizWindow {
                 JOptionPane.showMessageDialog(frame, "Leider falsch!");
             }
 
-            // Quiz beenden
+
             JOptionPane.showMessageDialog(frame, "Du hast die gemischte Runde mit 10 Fragen geschafft! Quiz beendet.");
-            frame.dispose(); // Schließt das Fenster automatisch
+            frame.dispose();
         }
     }
 }
