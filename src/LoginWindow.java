@@ -51,4 +51,4 @@ class LoginFenster extends JFrame {
             JOptionPane.showMessageDialog(this, "Falscher Benutzername oder Passwort!", "Fehler", JOptionPane.ERROR_MESSAGE);
         }
     }
-    }
+}
