@@ -79,11 +79,10 @@ public class QuizWindow {
             button1.setText("Compiler übersetzt alles vorab / Interpreter Zeile für Zeile");
             button2.setText("Interpreter übersetzt alles vorab / Compiler Zeile für Zeile");
             button3.setText("Es gibt überhaupt keinen Unterschied");
-            button4.setText("- Nicht belegt -");
+            button4.setVisible(false);
             return;
         }
 
-        // --- FRAGE 2 (IT) ---
         if (frageNummer == 2) {
             if (gewaehlteAntwort.equals("Compiler übersetzt alles vorab / Interpreter Zeile für Zeile")) {
                 JOptionPane.showMessageDialog(frame, "Richtig! Compiler macht alles auf einmal.");
@@ -96,6 +95,7 @@ public class QuizWindow {
             button1.setText("Nepal");
             button2.setText("Lesotho");
             button3.setText("Bhutan");
+            button4.setVisible(true);
             button4.setText("Tadschikistan");
             return;
         }
@@ -112,7 +112,7 @@ public class QuizWindow {
             button1.setText("Eine Liste hat immer eine feste Größe");
             button2.setText("Ein Array hat eine feste Größe, Listen sind dynamisch");
             button3.setText("Arrays können dynamisch wachsen");
-            button4.setText("- Nicht belegt -");
+            button4.setVisible(false);
             return;
         }
 
@@ -128,6 +128,7 @@ public class QuizWindow {
             button1.setText("Tansania/Kenya");
             button2.setText("Äthiopien/Somalia");
             button3.setText("Ägypten/Israel");
+            button4.setVisible(true);
             button4.setText("Gabun/Kongo");
             return;
         }
@@ -144,7 +145,7 @@ public class QuizWindow {
             button1.setText("Ein Text-Datentyp für Wörter");
             button2.setText("Ein Datentyp für Zahlen mit Komma");
             button3.setText("Ein logischer Datentyp für true oder false");
-            button4.setText("- Nicht belegt -");
+            button4.setVisible(false);
             return;
         }
 
@@ -160,6 +161,7 @@ public class QuizWindow {
             button1.setText("6");
             button2.setText("3");
             button3.setText("5");
+            button4.setVisible(true);
             button4.setText("7");
             return;
         }
@@ -208,7 +210,7 @@ public class QuizWindow {
             button1.setText("Universal Serial Bus");
             button2.setText("United Serial Button");
             button3.setText("Ultra Speed Bus");
-            button4.setText("- Nicht belegt -");
+            button4.setVisible(false);
             return;
         }
 
