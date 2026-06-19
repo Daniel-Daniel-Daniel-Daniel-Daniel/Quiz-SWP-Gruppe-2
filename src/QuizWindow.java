@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class QuizWindow {
 
@@ -10,22 +12,19 @@ public class QuizWindow {
     private JButton button3;
     private JButton button4;
 
-    private QuizManager quizManager; // Der Manager liefert die Daten
+    private int frageNummer = 1;
 
     public QuizWindow() {
-        quizManager = new QuizManager();
-
         frame = new JFrame("Das große SWP-Quiz");
         frame.setSize(650, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.setLayout(new FlowLayout());
 
-        frageLabel = new JLabel();
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        button4 = new JButton();
+        frageLabel = new JLabel("Frage 1: Was ist die Hauptstadt von Burkina Faso?");
+        button1 = new JButton("Luanda");
+        button2 = new JButton("Ouagadougou");
+        button3 = new JButton("Yamoussoukro");
+        button4 = new JButton("Nouakchott");
 
         frame.add(frageLabel);
         frame.add(button1);
@@ -33,50 +32,196 @@ public class QuizWindow {
         frame.add(button3);
         frame.add(button4);
 
-        // ActionListener nutzen Lambda-Ausdrücke für besseren Stil
-        button1.addActionListener(e -> auswahl(button1.getText()));
-        button2.addActionListener(e -> auswahl(button2.getText()));
-        button3.addActionListener(e -> auswahl(button3.getText()));
-        button4.addActionListener(e -> auswahl(button4.getText()));
 
-        // Erste Frage anzeigen
-        zeigeAktuelleFrage();
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                auswahl(button1.getText());
+            }
+        });
+
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                auswahl(button2.getText());
+            }
+        });
+
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                auswahl(button3.getText());
+            }
+        });
+
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                auswahl(button4.getText());
+            }
+        });
 
         frame.setVisible(true);
     }
 
-    private void zeigeAktuelleFrage() {
-        Frage aktuelleFrage = quizManager.getAktuelleFrage();
-
-        if (aktuelleFrage != null) {
-            // UI mit den Texten der aktuellen Frage befüllen
-            frageLabel.setText(aktuelleFrage.getText());
-            String[] antworten = aktuelleFrage.getAntworten();
-            button1.setText(antworten[0]);
-            button2.setText(antworten[1]);
-            button3.setText(antworten[2]);
-            button4.setText(antworten[3]);
-        } else {
-            // Keine Fragen mehr da -> Quiz beendet
-            JOptionPane.showMessageDialog(frame, "Du hast alle Fragen geschafft! Quiz beendet.");
-            frame.dispose();
-        }
-    }
-
     private void auswahl(String gewaehlteAntwort) {
-        Frage aktuelleFrage = quizManager.getAktuelleFrage();
 
-        if (aktuelleFrage != null) {
-            // Prüfung über die Frage-Klasse
-            if (aktuelleFrage.istKorrekt(gewaehlteAntwort)) {
-                JOptionPane.showMessageDialog(frame, "Richtig! " + gewaehlteAntwort + " ist korrekt!");
+        if (frageNummer == 1) {
+            if (gewaehlteAntwort.equals("Ouagadougou")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! Ouagadougou ist korrekt!");
             } else {
-                JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort ist: " + aktuelleFrage.getKorrekteAntwort());
+                JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort ist Ouagadougou.");
             }
 
-            // Zur nächsten Frage springen und UI aktualisieren
-            quizManager.naechsteFrage();
-            zeigeAktuelleFrage();
+
+            frageNummer = 2;
+            frageLabel.setText("Frage 2: Was ist der Unterschied zwischen einem Compiler und einem Interpreter?");
+            button1.setText("Compiler übersetzt alles vorab / Interpreter Zeile für Zeile");
+            button2.setText("Interpreter übersetzt alles vorab / Compiler Zeile für Zeile");
+            button3.setText("Es gibt überhaupt keinen Unterschied");
+            button4.setText("- Nicht belegt -");
+            return;
+        }
+
+        // --- FRAGE 2 (IT) ---
+        if (frageNummer == 2) {
+            if (gewaehlteAntwort.equals("Compiler übersetzt alles vorab / Interpreter Zeile für Zeile")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! Compiler macht alles auf einmal.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Falsch! Der Compiler übersetzt den gesamten Code vorab.");
+            }
+
+            frageNummer = 3;
+            frageLabel.setText("Frage 3: Was ist das Land mit der höchsten Durchschnittshöhe?");
+            button1.setText("Nepal");
+            button2.setText("Lesotho");
+            button3.setText("Bhutan");
+            button4.setText("Tadschikistan");
+            return;
+        }
+
+        if (frageNummer == 3) {
+            if (gewaehlteAntwort.equals("Bhutan")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! Bhutan hat weltweit die höchste durchschnittliche Geländehöhe.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort ist Bhutan.");
+            }
+
+            frageNummer = 4;
+            frageLabel.setText("Frage 4: Was unterscheidet ein Array von einer Liste?");
+            button1.setText("Eine Liste hat immer eine feste Größe");
+            button2.setText("Ein Array hat eine feste Größe, Listen sind dynamisch");
+            button3.setText("Arrays können dynamisch wachsen");
+            button4.setText("- Nicht belegt -");
+            return;
+        }
+
+        if (frageNummer == 4) {
+            if (gewaehlteAntwort.equals("Ein Array hat eine feste Größe, Listen sind dynamisch")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! Listen können flexibel wachsen.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Leider falsch! Arrays besitzen eine feste Größe.");
+            }
+
+            frageNummer = 5;
+            frageLabel.setText("Frage 5: Zwischen welchen Ländern liegt der Kilimandscharo?");
+            button1.setText("Tansania/Kenya");
+            button2.setText("Äthiopien/Somalia");
+            button3.setText("Ägypten/Israel");
+            button4.setText("Gabun/Kongo");
+            return;
+        }
+
+        if (frageNummer == 5) {
+            if (gewaehlteAntwort.equals("Tansania/Kenya")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! Er befindet sich an der Grenze von Tansania und Kenia.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Falsch! Richtige Antwort ist Tansania/Kenya.");
+            }
+
+            frageNummer = 6;
+            frageLabel.setText("Frage 6: Was bedeutet der Datentyp 'Boolean'?");
+            button1.setText("Ein Text-Datentyp für Wörter");
+            button2.setText("Ein Datentyp für Zahlen mit Komma");
+            button3.setText("Ein logischer Datentyp für true oder false");
+            button4.setText("- Nicht belegt -");
+            return;
+        }
+
+        if (frageNummer == 6) {
+            if (gewaehlteAntwort.equals("Ein logischer Datentyp für true oder false")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! Ein Boolean kennt nur wahr oder falsch.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Falsch! Er steht ausschließlich für true oder false.");
+            }
+
+            frageNummer = 7;
+            frageLabel.setText("Frage 7: Wie viele Spieler stehen beim Basketball auf dem Platz?");
+            button1.setText("6");
+            button2.setText("3");
+            button3.setText("5");
+            button4.setText("7");
+            return;
+        }
+
+        if (frageNummer == 7) {
+            if (gewaehlteAntwort.equals("5")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! Es stehen pro Team 5 Feldspieler auf dem Platz.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Falsch! Es sind 5 Spieler.");
+            }
+
+            frageNummer = 8;
+            frageLabel.setText("Frage 8: Wer schrieb den Roman „1984“?");
+            button1.setText("Franz Kafka");
+            button2.setText("George Orwell");
+            button3.setText("Karl Marx");
+            button4.setText("Shawn Carter");
+            return;
+        }
+
+        if (frageNummer == 8) {
+            if (gewaehlteAntwort.equals("George Orwell")) {
+                JOptionPane.showMessageDialog(frame, "Richtig! George Orwell schrieb diesen weltbekannten Roman.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Falsch! Der Autor heißt George Orwell.");
+            }
+
+            frageNummer = 9;
+            frageLabel.setText("Frage 9: Wer malte das Bild „Mona Lisa“?");
+            button1.setText("Jean-Michel Basquiat");
+            button2.setText("Michelangelo Buonarroti");
+            button3.setText("Pablo Picasso");
+            button4.setText("Leonardo Da Vinci");
+            return;
+        }
+
+        if (frageNummer == 9) {
+            if (gewaehlteAntwort.equals("Leonardo Da Vinci")) {
+                JOptionPane.showMessageDialog(frame, "Absolut richtig! Leonardo Da Vinci hat sie weltberühmt gemacht.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Falsch! Es war Leonardo Da Vinci.");
+            }
+
+            frageNummer = 10;
+            frageLabel.setText("Frage 10: Für was steht die Abkürzung 'USB'?");
+            button1.setText("Universal Serial Bus");
+            button2.setText("United Serial Button");
+            button3.setText("Ultra Speed Bus");
+            button4.setText("- Nicht belegt -");
+            return;
+        }
+
+        if (frageNummer == 10) {
+            if (gewaehlteAntwort.equals("Universal Serial Bus")) {
+                JOptionPane.showMessageDialog(frame, "Korrekt! USB bedeutet Universal Serial Bus.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Leider fasch!");
+            }
+
+
+            JOptionPane.showMessageDialog(frame, "Du hast die gemischte Runde mit 10 Fragen geschafft! Quiz beendet.");
+            frame.dispose();
         }
     }
 }
