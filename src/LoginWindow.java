@@ -1,54 +1,81 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-class LoginFenster extends JFrame {
+public class LoginWindow extends JFrame {
 
     private JTextField benutzerfeld;
     private JPasswordField passwortfeld;
     private JButton loginButton;
 
-    public LoginFenster() {
+    public LoginWindow() {
+
         setTitle("Quiz-App Anmeldung");
-        setSize(350, 200);
+        setSize(450, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 2));
+        this.getContentPane().setBackground(Color.orange);
 
-        add(new JLabel("  Benutzername:"));
+        JLabel titel = new JLabel(
+                "SWP Quiz Login",
+                SwingConstants.CENTER
+        );
+
+        titel.setFont(new Font("Arial", Font.BOLD, 24));
+
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        panel.setLayout(new GridLayout(3, 2, 10, 10));
+
+        panel.add(new JLabel("Benutzername:"));
+
         benutzerfeld = new JTextField();
-        add(benutzerfeld);
+        panel.add(benutzerfeld);
 
-        add(new JLabel("  Passwort:"));
+        panel.add(new JLabel("Passwort:"));
+
         passwortfeld = new JPasswordField();
-        add(passwortfeld);
+        panel.add(passwortfeld);
 
-        add(new JLabel(""));
+        panel.add(new JLabel(""));
 
         loginButton = new JButton("Einloggen");
-        add(loginButton);
+        loginButton.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(loginButton);
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pruefeAnmeldung();
-            }
-        });
+        setLayout(new BorderLayout(10, 10));
+
+        add(titel, BorderLayout.NORTH);
+        add(panel, BorderLayout.CENTER);
+
+        loginButton.addActionListener(e -> pruefeAnmeldung());
+
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void pruefeAnmeldung() {
+
         String benutzer = benutzerfeld.getText();
         String passwort = new String(passwortfeld.getPassword());
 
         if (benutzer.equals("admin") && passwort.equals("1234")) {
-            JOptionPane.showMessageDialog(this, "Anmeldung erfolgreich! Das Quiz startet jetzt.");
 
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Anmeldung erfolgreich!\nDas Quiz startet jetzt."
+            );
 
             new QuizWindow();
 
-            this.dispose();
+            dispose();
+
         } else {
-            JOptionPane.showMessageDialog(this, "Falscher Benutzername oder Passwort!", "Fehler", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Falscher Benutzername oder Passwort!",
+                    "Fehler",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 }

@@ -5,6 +5,7 @@ public class QuizWindow {
 
     private JFrame frame;
     private JLabel frageLabel;
+    private JLabel punkteLabel;
 
     private JButton button1;
     private JButton button2;
@@ -13,27 +14,70 @@ public class QuizWindow {
 
     private QuizManager quizManager;
 
+    private int punkte = 0;
+
     public QuizWindow() {
 
         quizManager = new QuizManager();
 
         frame = new JFrame("Das große SWP-Quiz");
-        frame.setSize(700, 250);
+        frame.setSize(850, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new FlowLayout());
 
-        frageLabel = new JLabel();
+        JPanel backgroundPanel = new JPanel(new BorderLayout(15, 15)) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+                Color startFarbe = Color.CYAN;
+                Color endFarbe = Color.MAGENTA;
+
+                GradientPaint verlauf = new GradientPaint(0, 0, startFarbe, 0, getHeight(), endFarbe);
+                g2d.setPaint(verlauf);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        backgroundPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        frame.setContentPane(backgroundPanel);
+
+
+        frageLabel = new JLabel("", SwingConstants.CENTER);
+        frageLabel.setFont(new Font("Arial", Font.BOLD, 22));
+
+        punkteLabel = new JLabel("Punkte: 0", SwingConstants.CENTER);
+        punkteLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        punkteLabel.setForeground(Color.WHITE);
 
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
         button4 = new JButton();
 
-        frame.add(frageLabel);
-        frame.add(button1);
-        frame.add(button2);
-        frame.add(button3);
-        frame.add(button4);
+        Font buttonFont = new Font("Arial", Font.PLAIN, 16);
+
+        button1.setFont(buttonFont);
+        button2.setFont(buttonFont);
+        button3.setFont(buttonFont);
+        button4.setFont(buttonFont);
+
+        JPanel antwortPanel = new JPanel();
+        antwortPanel.setLayout(new GridLayout(2, 2, 15, 15));
+
+
+        antwortPanel.setOpaque(false);
+
+        antwortPanel.add(button1);
+        antwortPanel.add(button2);
+        antwortPanel.add(button3);
+        antwortPanel.add(button4);
+
+
+        backgroundPanel.add(frageLabel, BorderLayout.NORTH);
+        backgroundPanel.add(antwortPanel, BorderLayout.CENTER);
+        backgroundPanel.add(punkteLabel, BorderLayout.SOUTH);
 
         button1.addActionListener(e -> auswahl(button1.getText()));
         button2.addActionListener(e -> auswahl(button2.getText()));
@@ -42,6 +86,7 @@ public class QuizWindow {
 
         zeigeFrage();
 
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -65,16 +110,27 @@ public class QuizWindow {
         button4.setVisible(!antworten[3].equals("- Nicht belegt -"));
     }
 
+
     private void auswahl(String gewaehlteAntwort) {
 
         Question frage = quizManager.getAktuelleFrage();
 
         if (frage.istKorrekt(gewaehlteAntwort)) {
-            JOptionPane.showMessageDialog(frame, "Richtig!");
-        } else {
+
+            punkte++;
+
+            punkteLabel.setText("Punkte: " + punkte);
+
             JOptionPane.showMessageDialog(
                     frame,
-                    "Falsch! Richtige Antwort: "
+                    "Richtig!"
+            );
+
+        } else {
+
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Falsch!\nDie richtige Antwort lautet:\n"
                             + frage.getKorrekteAntwort()
             );
         }
@@ -82,12 +138,19 @@ public class QuizWindow {
         quizManager.naechsteFrage();
 
         if (quizManager.hatMehrFragen()) {
+
             zeigeFrage();
+
         } else {
+
             JOptionPane.showMessageDialog(
                     frame,
-                    "Quiz beendet!"
+                    "Quiz beendet!\n\n"
+                            + "Du hast "
+                            + punkte
+                            + " von 10 Punkten erreicht."
             );
+
             frame.dispose();
         }
     }
