@@ -3,6 +3,8 @@ import java.awt.*;
 
 public class QuizWindow {
 
+
+
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel pointLabel;
@@ -16,6 +18,7 @@ public class QuizWindow {
 
     private int points = 0;
 
+    //Konstruktor des Quizwindows (erstellen)
     public QuizWindow() {
 
         quizManager = new QuizManager();
