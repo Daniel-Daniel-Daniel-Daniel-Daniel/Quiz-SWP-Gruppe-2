@@ -8,13 +8,13 @@ public class QuizManager {
 
     public QuizManager() {
         questionList = new ArrayList<>();
-        currentQuestion = 0;
-        initFragen();
+        currentQuestion = 0;        //Quiz beginnt bei der 1. Frage
+        initFragen();               //Fragen werden hinzugefügt
     }
 
     private void initFragen() {
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 1: Was ist die Hauptstadt von Burkina Faso?",
                 "Luanda",
                 "Ouagadougou",
@@ -23,7 +23,7 @@ public class QuizManager {
                 "Ouagadougou"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 2: Wie viele Einwohner hat Reutte?",
                 "6200",
                 "9100",
@@ -32,7 +32,7 @@ public class QuizManager {
                 "7300"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 3: Was ist das Land mit der höchsten Durchschnittshöhe?",
                 "Nepal",
                 "Lesotho",
@@ -41,7 +41,7 @@ public class QuizManager {
                 "Bhutan"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 4: Was unterscheidet ein Array von einer Liste?",
                 "Eine Liste hat immer eine feste Größe",
                 "Array --> feste Größe, Listen --> dynamisch",
@@ -50,7 +50,7 @@ public class QuizManager {
                 "Array --> feste Größe, Listen --> dynamisch"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 5: Zwischen welchen Ländern liegt der Kilimandscharo?",
                 "Tansania/Kenya",
                 "Äthiopien/Somalia",
@@ -59,7 +59,7 @@ public class QuizManager {
                 "Tansania/Kenya"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 6: Was bedeutet der Datentyp Boolean?",
                 "Ein Text-Datentyp für Wörter",
                 "Ein Datentyp für Zahlen mit Komma",
@@ -68,7 +68,7 @@ public class QuizManager {
                 "Ein logischer Datentyp für true oder false"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 7: Wie viele Spieler stehen beim Basketball auf dem Platz?",
                 "6",
                 "3",
@@ -77,7 +77,7 @@ public class QuizManager {
                 "5"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 8: Wer schrieb den Roman 1984?",
                 "Franz Kafka",
                 "George Orwell",
@@ -86,7 +86,7 @@ public class QuizManager {
                 "George Orwell"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 9: Wer malte die Mona Lisa?",
                 "Jean-Michel Basquiat",
                 "Michelangelo Buonarroti",
@@ -95,7 +95,7 @@ public class QuizManager {
                 "Leonardo Da Vinci"
         ));
 
-        questionList.add(new Question(
+        questionList.add(new Question(      //zur questionList wird ein neues Question Objekt hinzugefügt bzw. erstellt
                 "Frage 10: Für was steht die Abkürzung USB?",
                 "Universal Serial Bus",
                 "United Serial Button",
@@ -105,18 +105,18 @@ public class QuizManager {
         ));
     }
 
-    public Question getCurrentQuestion() {
+    public Question getCurrentQuestion() {      //Methode liefert die aktuelle Frage
         if (currentQuestion < questionList.size()) {
-            return questionList.get(currentQuestion);
+            return questionList.get(currentQuestion);       //...wenn in der FrageListe enthalten
         }
         return null;
     }
 
-    public void nextQuestion() {
+    public void nextQuestion() {     //erhöht die qurrentQuestion um 1, damit dann die nextQuestion auch die nächste ist
         currentQuestion++;
     }
 
-    public boolean moreQuestions() {
+    public boolean moreQuestions() {        //Methode zur Überprüfung ob es noch Fragen gibt
         return currentQuestion < questionList.size();
     }
 }

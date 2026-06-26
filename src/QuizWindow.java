@@ -3,185 +3,147 @@ import java.awt.*;
 
 public class QuizWindow {
 
-    // Hauptfenster des Quiz
     private JFrame frame;
+    private JLabel questionLabel;       //zeigt aktuelle Frage an
+    private JLabel pointLabel;          //zeigt Punktezahl an
 
-    // Zeigt die aktuelle Frage an
-    private JLabel questionLabel;
-
-    // Zeigt die aktuelle Punktzahl an
-    private JLabel pointLabel;
-
-    // Antwortbuttons
     private JButton button1;
     private JButton button2;
     private JButton button3;
     private JButton button4;
 
-    // Verwaltet Fragen und Quizablauf
     private QuizManager quizManager;
 
-    // Speichert die erreichten Punkte
-    private int points = 0;
+    private int points = 0;     //speichert die erreichten Punkte
 
-    // Konstruktor: Erstellt das komplette Quizfenster
     public QuizWindow() {
 
         quizManager = new QuizManager();
 
-        // Fenster erstellen
         frame = new JFrame("Das große SWP-Quiz");
         frame.setSize(850, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Hintergrundpanel mit Farbverlauf
         JPanel backgroundPanel = new JPanel(new BorderLayout(15, 15)) {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-
                 Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
-                        RenderingHints.VALUE_RENDER_QUALITY);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
                 Color startColor = Color.ORANGE;
                 Color endColor = Color.GREEN;
 
-                // Farbverlauf zeichnen
-                GradientPaint verlauf =
-                        new GradientPaint(0, 0, startColor, 0, getHeight(), endColor);
-
+                GradientPaint verlauf = new GradientPaint(0, 0, startColor, 0, getHeight(), endColor);
                 g2d.setPaint(verlauf);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-
-        // Abstand zum Fensterrand
-        backgroundPanel.setBorder(
-                BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        backgroundPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         frame.setContentPane(backgroundPanel);
 
-        // Frageanzeige
-        questionLabel = new JLabel("", SwingConstants.CENTER);
-        questionLabel.setFont(new Font("Arial", Font.BOLD, 22));
 
-        // Punkteanzeige
+        questionLabel = new JLabel("", SwingConstants.CENTER);
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 22));        //Schriftart des Labels wird festgelegt
+
         pointLabel = new JLabel("Punkte: 0", SwingConstants.CENTER);
         pointLabel.setFont(new Font("Arial", Font.BOLD, 18));
         pointLabel.setForeground(Color.WHITE);
 
-        // Antwortbuttons erstellen
-        button1 = new JButton();
+        button1 = new JButton();        //Buttons werden erstellt
         button2 = new JButton();
         button3 = new JButton();
         button4 = new JButton();
 
-        Font buttonFont = new Font("Arial", Font.PLAIN, 16);
+        Font buttonFont = new Font("Arial", Font.PLAIN, 16);        //Schriftart wird erstellt
 
-        button1.setFont(buttonFont);
+        button1.setFont(buttonFont);        //Schriftart wird auf die Buttons angewandt
         button2.setFont(buttonFont);
         button3.setFont(buttonFont);
         button4.setFont(buttonFont);
 
-        // Panel für die Antwortmöglichkeiten
         JPanel answerPanel = new JPanel();
-        answerPanel.setLayout(new GridLayout(2, 2, 15, 15));
-        answerPanel.setOpaque(false);
+        answerPanel.setLayout(new GridLayout(2, 2, 15, 15));        //Layout wird festgelegt
 
-        // Buttons zum Panel hinzufügen
-        answerPanel.add(button1);
+
+        answerPanel.setOpaque(false);       //setzt das Panel auf durchsichtig, damit man den HIntergurnd sieht (sonst hätte das Panel einen eigenen)
+
+        answerPanel.add(button1);       //Buttons werden zum Panel hinzugefügt
         answerPanel.add(button2);
         answerPanel.add(button3);
         answerPanel.add(button4);
 
-        // Komponenten im Fenster platzieren
-        backgroundPanel.add(questionLabel, BorderLayout.NORTH);
-        backgroundPanel.add(answerPanel, BorderLayout.CENTER);
-        backgroundPanel.add(pointLabel, BorderLayout.SOUTH);
 
-        // Klickereignisse der Buttons
-        button1.addActionListener(e -> selection(button1.getText()));
+        backgroundPanel.add(questionLabel, BorderLayout.NORTH);     //Fragen Label kommt oben hin
+        backgroundPanel.add(answerPanel, BorderLayout.CENTER);      //Antworten Panel kommt in die Mitte
+        backgroundPanel.add(pointLabel, BorderLayout.SOUTH);        //Punkt Label wird am unteren Rand eingefügt
+
+        button1.addActionListener(e -> selection(button1.getText()));       //wenn der Button gedrück wird wird die Methode selection ausgeführt
         button2.addActionListener(e -> selection(button2.getText()));
         button3.addActionListener(e -> selection(button3.getText()));
         button4.addActionListener(e -> selection(button4.getText()));
 
-        // Erste Frage anzeigen
-        showQuestion();
+        showQuestion();     //Methode sorgt dafür, dass beim Programmstart die 1. Frage erscheint
 
-        // Fenster zentrieren und anzeigen
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(null);      //Fenster wird in der Bildschirmmitte geöffnet
         frame.setVisible(true);
     }
 
-    // Zeigt die aktuelle Frage und ihre Antworten an
-    private void showQuestion() {
+    private void showQuestion() {       //Methode zeigt immer die aktuelle Frage an
 
-        Question question = quizManager.getCurrentQuestion();
+        Question question = quizManager.getCurrentQuestion();       //Fenster holt sich die aktuelle Frage vom QuizManager
 
-        // Falls keine Frage vorhanden ist
-        if (question == null) {
+        if (question == null) {     //Falls keine Frage mehr vorhanden, wird die Methode beendet
             return;
         }
 
-        // Fragetext setzen
         questionLabel.setText(question.getText());
 
-        // Antworten laden
-        String[] answers = question.getAnswers();
+        String[] answers = question.getAnswers();       //hier werden die Antwortmöglichkeiten geholt
 
-        // Antworten auf die Buttons verteilen
-        button1.setText(answers[0]);
+        button1.setText(answers[0]);        //hier werden den Buttons die Texte zugewiesen
         button2.setText(answers[1]);
         button3.setText(answers[2]);
         button4.setText(answers[3]);
 
-        // Vierten Button nur anzeigen, wenn eine vierte Antwort existiert
-        button4.setVisible(!answers[3].equals("- Nicht belegt -"));
+        button4.setVisible(!answers[3].equals("- Nicht belegt -"));     //wenn der Button nicht belegt ist wird er unsichtbar
     }
 
-    // Wird aufgerufen, wenn eine Antwort ausgewählt wurde
-    private void selection(String chosenQuestion) {
+
+    private void selection(String chosenQuestion) {     //Methode wird ausgeführt, wenn der Benutzer auf den Button klickt
 
         Question question = quizManager.getCurrentQuestion();
 
-        // Prüfen, ob die Antwort richtig ist
-        if (question.isCorrect(chosenQuestion)) {
+        if (question.isCorrect(chosenQuestion)) {       //wenn die Antowrt korrekt ist, wird die Punktezahl um 1 erhöht
 
-            // Punkt erhöhen
             points++;
 
-            // Punkteanzeige aktualisieren
             pointLabel.setText("Punkte: " + points);
 
-            // Meldung anzeigen
-            JOptionPane.showMessageDialog(
+            JOptionPane.showMessageDialog(      //Fenster mit Nachricht erscheint
                     frame,
                     "Richtig!"
             );
 
         } else {
 
-            // Richtige Antwort anzeigen
-            JOptionPane.showMessageDialog(
+            JOptionPane.showMessageDialog(      //Falls die Antwort falsch ist wird eine Nachricht mit der richtigen Antwort angezeigt
                     frame,
                     "Falsch!\nDie richtige Antwort lautet:\n"
                             + question.getCorrectAnswer()
             );
         }
 
-        // Zur nächsten Frage wechseln
         quizManager.nextQuestion();
 
-        // Falls noch Fragen vorhanden sind
-        if (quizManager.moreQuestions()) {
+        if (quizManager.moreQuestions()) {      //nächste Frage falls es noch welche gibt
 
             showQuestion();
 
         } else {
 
-            // Endergebnis anzeigen oder so
-            JOptionPane.showMessageDialog(
+            JOptionPane.showMessageDialog(      //Falls es keine mehr gibt wird die Endnachricht mit erreichter Punktezahl angezeigt
                     frame,
                     "Quiz beendet!\n\n"
                             + "Du hast "
@@ -189,7 +151,6 @@ public class QuizWindow {
                             + " von 10 Punkten erreicht."
             );
 
-            // Fenster schließen
             frame.dispose();
         }
     }
