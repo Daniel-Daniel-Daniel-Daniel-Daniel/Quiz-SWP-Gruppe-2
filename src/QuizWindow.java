@@ -180,7 +180,7 @@ public class QuizWindow {
 
         } else {
 
-            // Endergebnis anzeigen
+            // Endergebnis anzeigen oder so
             JOptionPane.showMessageDialog(
                     frame,
                     "Quiz beendet!\n\n"
