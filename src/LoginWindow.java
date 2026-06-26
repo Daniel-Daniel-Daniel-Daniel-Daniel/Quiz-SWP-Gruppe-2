@@ -51,7 +51,7 @@ public class LoginWindow extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
+//Prüfe Anmeldung
     private void pruefeAnmeldung() {
 
         String benutzer = benutzerfeld.getText();
