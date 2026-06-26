@@ -9,6 +9,7 @@ public class QuizWindow {
     private JLabel questionLabel;
     private JLabel pointLabel;
 
+    //Erstellt Buttons
     private JButton button1;
     private JButton button2;
     private JButton button3;
@@ -92,7 +93,7 @@ public class QuizWindow {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
+//zeigt die frage an
     private void showQuestion() {
 
         Question question = quizManager.getCurrentQuestion();
@@ -113,7 +114,7 @@ public class QuizWindow {
         button4.setVisible(!answers[3].equals("- Nicht belegt -"));
     }
 
-
+//Auswahl
     private void selection(String chosenQuestion) {
 
         Question question = quizManager.getCurrentQuestion();
