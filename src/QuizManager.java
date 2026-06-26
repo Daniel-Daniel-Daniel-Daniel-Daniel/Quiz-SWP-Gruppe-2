@@ -3,18 +3,18 @@ import java.util.List;
 
 public class QuizManager {
 
-    private List<Question> fragenListe;
-    private int aktuelleFrage;
+    private List<Question> questionList;
+    private int currentQuestion;
 
     public QuizManager() {
-        fragenListe = new ArrayList<>();
-        aktuelleFrage = 0;
+        questionList = new ArrayList<>();
+        currentQuestion = 0;
         initFragen();
     }
 
     private void initFragen() {
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 1: Was ist die Hauptstadt von Burkina Faso?",
                 "Luanda",
                 "Ouagadougou",
@@ -23,16 +23,16 @@ public class QuizManager {
                 "Ouagadougou"
         ));
 
-        fragenListe.add(new Question(
-                "Frage 2: Was ist der Unterschied zwischen einem Compiler und einem Interpreter?",
-                "Compiler übersetzt alles vorab / Interpreter Zeile für Zeile",
-                "Interpreter übersetzt alles vorab / Compiler Zeile für Zeile",
-                "Es gibt überhaupt keinen Unterschied",
+        questionList.add(new Question(
+                "Frage 2: Wie viele Einwohner hat Reutte?",
+                "6200",
+                "9100",
+                "7300",
                 "- Nicht belegt -",
-                "Compiler übersetzt alles vorab / Interpreter Zeile für Zeile"
+                "7300"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 3: Was ist das Land mit der höchsten Durchschnittshöhe?",
                 "Nepal",
                 "Lesotho",
@@ -41,16 +41,16 @@ public class QuizManager {
                 "Bhutan"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 4: Was unterscheidet ein Array von einer Liste?",
                 "Eine Liste hat immer eine feste Größe",
-                "Ein Array hat eine feste Größe, Listen sind dynamisch",
+                "Array --> feste Größe, Listen --> dynamisch",
                 "Arrays können dynamisch wachsen",
                 "- Nicht belegt -",
-                "Ein Array hat eine feste Größe, Listen sind dynamisch"
+                "Array --> feste Größe, Listen --> dynamisch"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 5: Zwischen welchen Ländern liegt der Kilimandscharo?",
                 "Tansania/Kenya",
                 "Äthiopien/Somalia",
@@ -59,7 +59,7 @@ public class QuizManager {
                 "Tansania/Kenya"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 6: Was bedeutet der Datentyp Boolean?",
                 "Ein Text-Datentyp für Wörter",
                 "Ein Datentyp für Zahlen mit Komma",
@@ -68,7 +68,7 @@ public class QuizManager {
                 "Ein logischer Datentyp für true oder false"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 7: Wie viele Spieler stehen beim Basketball auf dem Platz?",
                 "6",
                 "3",
@@ -77,7 +77,7 @@ public class QuizManager {
                 "5"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 8: Wer schrieb den Roman 1984?",
                 "Franz Kafka",
                 "George Orwell",
@@ -86,7 +86,7 @@ public class QuizManager {
                 "George Orwell"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 9: Wer malte die Mona Lisa?",
                 "Jean-Michel Basquiat",
                 "Michelangelo Buonarroti",
@@ -95,7 +95,7 @@ public class QuizManager {
                 "Leonardo Da Vinci"
         ));
 
-        fragenListe.add(new Question(
+        questionList.add(new Question(
                 "Frage 10: Für was steht die Abkürzung USB?",
                 "Universal Serial Bus",
                 "United Serial Button",
@@ -105,18 +105,18 @@ public class QuizManager {
         ));
     }
 
-    public Question getAktuelleFrage() {
-        if (aktuelleFrage < fragenListe.size()) {
-            return fragenListe.get(aktuelleFrage);
+    public Question getCurrentQuestion() {
+        if (currentQuestion < questionList.size()) {
+            return questionList.get(currentQuestion);
         }
         return null;
     }
 
-    public void naechsteFrage() {
-        aktuelleFrage++;
+    public void nextQuestion() {
+        currentQuestion++;
     }
 
-    public boolean hatMehrFragen() {
-        return aktuelleFrage < fragenListe.size();
+    public boolean moreQuestions() {
+        return currentQuestion < questionList.size();
     }
 }

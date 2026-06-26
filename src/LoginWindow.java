@@ -12,7 +12,7 @@ public class LoginWindow extends JFrame {
         setTitle("Quiz-App Anmeldung");
         setSize(450, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getContentPane().setBackground(Color.orange);
+        this.getContentPane().setBackground(Color.lightGray);
 
         JLabel titel = new JLabel(
                 "SWP Quiz Login",

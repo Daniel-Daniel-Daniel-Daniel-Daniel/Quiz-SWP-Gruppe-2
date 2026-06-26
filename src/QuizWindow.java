@@ -4,8 +4,8 @@ import java.awt.*;
 public class QuizWindow {
 
     private JFrame frame;
-    private JLabel frageLabel;
-    private JLabel punkteLabel;
+    private JLabel questionLabel;
+    private JLabel pointLabel;
 
     private JButton button1;
     private JButton button2;
@@ -14,7 +14,7 @@ public class QuizWindow {
 
     private QuizManager quizManager;
 
-    private int punkte = 0;
+    private int points = 0;
 
     public QuizWindow() {
 
@@ -31,10 +31,10 @@ public class QuizWindow {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-                Color startFarbe = Color.CYAN;
-                Color endFarbe = Color.MAGENTA;
+                Color startColor = Color.ORANGE;
+                Color endColor = Color.GREEN;
 
-                GradientPaint verlauf = new GradientPaint(0, 0, startFarbe, 0, getHeight(), endFarbe);
+                GradientPaint verlauf = new GradientPaint(0, 0, startColor, 0, getHeight(), endColor);
                 g2d.setPaint(verlauf);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
@@ -44,12 +44,12 @@ public class QuizWindow {
         frame.setContentPane(backgroundPanel);
 
 
-        frageLabel = new JLabel("", SwingConstants.CENTER);
-        frageLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        questionLabel = new JLabel("", SwingConstants.CENTER);
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 22));
 
-        punkteLabel = new JLabel("Punkte: 0", SwingConstants.CENTER);
-        punkteLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        punkteLabel.setForeground(Color.WHITE);
+        pointLabel = new JLabel("Punkte: 0", SwingConstants.CENTER);
+        pointLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        pointLabel.setForeground(Color.WHITE);
 
         button1 = new JButton();
         button2 = new JButton();
@@ -63,63 +63,63 @@ public class QuizWindow {
         button3.setFont(buttonFont);
         button4.setFont(buttonFont);
 
-        JPanel antwortPanel = new JPanel();
-        antwortPanel.setLayout(new GridLayout(2, 2, 15, 15));
+        JPanel answerPanel = new JPanel();
+        answerPanel.setLayout(new GridLayout(2, 2, 15, 15));
 
 
-        antwortPanel.setOpaque(false);
+        answerPanel.setOpaque(false);
 
-        antwortPanel.add(button1);
-        antwortPanel.add(button2);
-        antwortPanel.add(button3);
-        antwortPanel.add(button4);
+        answerPanel.add(button1);
+        answerPanel.add(button2);
+        answerPanel.add(button3);
+        answerPanel.add(button4);
 
 
-        backgroundPanel.add(frageLabel, BorderLayout.NORTH);
-        backgroundPanel.add(antwortPanel, BorderLayout.CENTER);
-        backgroundPanel.add(punkteLabel, BorderLayout.SOUTH);
+        backgroundPanel.add(questionLabel, BorderLayout.NORTH);
+        backgroundPanel.add(answerPanel, BorderLayout.CENTER);
+        backgroundPanel.add(pointLabel, BorderLayout.SOUTH);
 
-        button1.addActionListener(e -> auswahl(button1.getText()));
-        button2.addActionListener(e -> auswahl(button2.getText()));
-        button3.addActionListener(e -> auswahl(button3.getText()));
-        button4.addActionListener(e -> auswahl(button4.getText()));
+        button1.addActionListener(e -> selection(button1.getText()));
+        button2.addActionListener(e -> selection(button2.getText()));
+        button3.addActionListener(e -> selection(button3.getText()));
+        button4.addActionListener(e -> selection(button4.getText()));
 
-        zeigeFrage();
+        showQuestion();
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private void zeigeFrage() {
+    private void showQuestion() {
 
-        Question frage = quizManager.getAktuelleFrage();
+        Question question = quizManager.getCurrentQuestion();
 
-        if (frage == null) {
+        if (question == null) {
             return;
         }
 
-        frageLabel.setText(frage.getText());
+        questionLabel.setText(question.getText());
 
-        String[] antworten = frage.getAntworten();
+        String[] answers = question.getAnswers();
 
-        button1.setText(antworten[0]);
-        button2.setText(antworten[1]);
-        button3.setText(antworten[2]);
-        button4.setText(antworten[3]);
+        button1.setText(answers[0]);
+        button2.setText(answers[1]);
+        button3.setText(answers[2]);
+        button4.setText(answers[3]);
 
-        button4.setVisible(!antworten[3].equals("- Nicht belegt -"));
+        button4.setVisible(!answers[3].equals("- Nicht belegt -"));
     }
 
 
-    private void auswahl(String gewaehlteAntwort) {
+    private void selection(String chosenQuestion) {
 
-        Question frage = quizManager.getAktuelleFrage();
+        Question question = quizManager.getCurrentQuestion();
 
-        if (frage.istKorrekt(gewaehlteAntwort)) {
+        if (question.isCorrect(chosenQuestion)) {
 
-            punkte++;
+            points++;
 
-            punkteLabel.setText("Punkte: " + punkte);
+            pointLabel.setText("Punkte: " + points);
 
             JOptionPane.showMessageDialog(
                     frame,
@@ -131,15 +131,15 @@ public class QuizWindow {
             JOptionPane.showMessageDialog(
                     frame,
                     "Falsch!\nDie richtige Antwort lautet:\n"
-                            + frage.getKorrekteAntwort()
+                            + question.getCorrectAnswer()
             );
         }
 
-        quizManager.naechsteFrage();
+        quizManager.nextQuestion();
 
-        if (quizManager.hatMehrFragen()) {
+        if (quizManager.moreQuestions()) {
 
-            zeigeFrage();
+            showQuestion();
 
         } else {
 
@@ -147,7 +147,7 @@ public class QuizWindow {
                     frame,
                     "Quiz beendet!\n\n"
                             + "Du hast "
-                            + punkte
+                            + points
                             + " von 10 Punkten erreicht."
             );
 
